@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+<head>
+{% block title %}My {{type}}{% endblock %}
+</head>
+
+{% block content %}
+<body>
+<div>
+    <!-- <img src="{{ img }}" id="pet" width="100" frameBorder="0"/> -->
+    <img src="{{ img }}" id="pet" width="100" height="100" frameBorder="0"/>
+    <h3>{{name}}</h3>
+    <p>Points: {{points}}</p>
+    <p>Current Status:</p>
+    <p>Food: {{food}}</p>
+    <p>Mood: {{play}}</p>
+    <!--eating, sleeping, playing, daydreaming, hungry, boring, drinking water, sick, etc -->
+    <div>
+        <form action="/feed">
+        <p>
+            <input type="submit" id="feed" value="Feed!"/>
+        </p>
+        </form>
+        <form action="/play">
+        <p>
+            <input type="submit" id="play" value="Play!" />
+        </p>
+        </form>    
+        <form action="/minus-food">
+        <p>
+            <input type="submit" value="Remove food points" />
+        </p>
+        </form>
+        <form action="/minus-play">
+        <p>
+            <input type="submit" value="Remove play points" />
+        </p>
+        </form>
+        <p>{{visitors}}</p>
+        <script>
+            let session = {{session|tojson}};
+            let feed_button = document.getElementById("feed");
+            let play_button = document.getElementById("play");
+            // console.log(session)
+            checkClickable();
+            if ("{{img}}".includes("_eating.gif") || "{{img}}".includes("_playing.gif"))
+            {
+                feed_button.classList.add('off');
+                play_button.classList.add('off');
+                document.getElementById("feed").style.pointerEvents = 'none'
+                document.getElementById("play").style.pointerEvents = 'none'
+                window.onload = function(){
+                    setTimeout(reload, 15*1000);
+                };
+            }
+            function reload() {
+                document.getElementById("pet").src = "{{ alt_img }}";
+                checkClickable();
+            }
+            
+            function checkClickable() {
+                if (session.current_food_bar == session.max_food_bar)
+                {
+                    feed_button.classList.add('off');
+                    feed_button.style.pointerEvents = 'none'
+                } else {
+                    feed_button.classList.remove('off');
+                    feed_button.style.pointerEvents = 'auto'
+                }
+        
+                if (session.current_play_bar == session.max_play_bar)
+                {
+                    play_button.classList.add('off');
+                    play_button.style.pointerEvents = 'none'
+                } else {
+                    play_button.classList.remove('off');
+                    play_button.style.pointerEvents = 'auto'
+                }
+            }
+        </script>
+    </div>
+</div>
+</body>
+{% endblock %}

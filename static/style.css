@@ -1,0 +1,49 @@
+body {
+    background-image: url('paw_prints_bg.png') !important;
+    background-color: #f1fff8;
+}
+
+html {
+    overflow-x: hidden;
+    margin-right: calc(-1 * (100vw - 100%)); /* https://stackoverflow.com/questions/1417934/how-to-prevent-scrollbar-from-repositioning-web-page */
+}
+
+input {
+    cursor: pointer;
+    pointerEvents: auto;
+}
+.off {
+    opacity: 0.5;
+}
+
+.less-narrow {
+    max-width: 1000px;
+}
+
+.narrow {
+    max-width: 800px;
+}
+
+.navbar-toggler {
+    border-width: 0px;
+    color: #91c8ea;
+}
+
+table {
+    border-color: rgba(211, 241, 255, 0.6) !important;
+    border-width: 4px !important;
+    border-style: solid;
+}
+
+/* thead, tbody, tr {
+    border-color: rgba(211, 241, 255, 0.6);
+} */
+
+.points-lb {
+    background-color: rgba(211, 241, 255, 0.6);
+}
+
+.nav-item {
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
+}

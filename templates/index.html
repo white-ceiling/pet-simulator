@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+<!doctype html>
+<html>
+<head>
+    {% block title %} Welcome! {% endblock %}
+</head>
+{% block content %}
+<body>
+<!--     <a href='/logout'>Log out</a> -->
+    {% if id %}
+        <h2>Hello, {{ username }}!</h2>
+    {% endif %}
+    <h1>Welcome to Pet Simulator!</h1>
+    <div class="mx-1">
+    {% if id %}
+<!--         <p>Your user id is {{ user_id }}.</p> -->
+        {% if has_pet %}
+        <a href="/main">Visit your pet!</a>
+        {% else %}
+            <p>Let's get started with your first pet!</p>
+            <p>Choose one of the following pets:</p>
+        
+            <a href="/parrot/0">
+                <img src="{{ url_for('static', filename='parrot.gif') }}"width="100" height="100" frameBorder="0"/>
+            </a>
+            
+            <a href="/cat/0">
+                <img src="{{ url_for('static', filename='cat.gif') }}"width="100" height="100" frameBorder="0"/>
+            </a>
+            
+            <a href="/dog/0">
+            <img src="{{ url_for('static', filename='dog.gif') }}"width="100" height="100" frameBorder="0"/>
+            </a>
+            
+            <a href="/bunny/0">
+            <img src="{{ url_for('static', filename='bunny.gif') }}"width="100" height="100" frameBorder="0"/>
+            </a>
+        {% endif %}
+    {% else %}
+        <p> Hello! Please log in through GitHub to adopt your own pet. </p>
+        
+        <div>
+            <a href="/login"> Log in</a>
+        </div>
+        
+    {% endif %}
+    </div>
+    
+    <h2 class="mt-4">Recent Activity</h2>
+
+    <div class="userlist mx-1">
+    {% for user in users %}
+        <p title="{{users[user][3]}}">
+        <a href="/{{user}}">{{users[user][0]}}</a> fed <a href="/{{user}}">{{users[user][1]}}</a> {{users[user][2]}}
+        </p>
+    {% endfor %}
+    </div>
+</body>
+{% endblock %}
+    
+</html>

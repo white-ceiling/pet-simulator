@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+<head>{% block title %}Leaderboard{% endblock %}</head>
+
+<body>
+{% block content %}
+    <h1 class="mb-3">Leaderboard</h1>
+<!--     <div class="div-table"> -->
+    <p class="mx-1">{{message}}</p>
+    <table class="table" style="max-width: 500px;">
+        <col style="width:6%">
+    	<col style="width:51%">
+    	<col style="width:43%">
+        <thead class="points-lb">
+            <tr>
+<!--                 <th colspan="2" style="border-bottom-width: 0px">player</th> -->
+                <th style="border-bottom-width: 0px"></th>
+                <th style="border-bottom-width: 0px">player</th>
+                <th style="border-bottom-width: 0px">points</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td style="border-bottom-width: 0px; color: #3c6781">{{users[user][0]}}.</td>
+                    <td style="border-bottom-width: 0px">{{user}}</td>
+                    <td style="border-bottom-width: 0px; color: #3c6781">{{users[user][1]}}</td>
+<!--                     style="color: #3c6781" -->
+                </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+<!--     </div> -->
+{% endblock %}
+</body>

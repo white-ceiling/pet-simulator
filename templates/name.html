@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+<head>
+{% block title %}Name Your Pet!{% endblock %}
+</head>
+
+{% block content %}
+<p>You chose a {{type}}!</p>
+
+<p><img src="{{ img }}"width="100" height="100" frameBorder="0"/></p>
+<p>{{invalid_string}}</p>
+
+<p>
+<form action="/check-name">
+    <p>What will you name them?</p>
+    <input type="text" name="pet_name"/>
+    <input type="submit" value="Confirm" />
+    
+</form>
+</p>
+<p>Names can be up to 32 characters!</p>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+<head>
+{% block title %}Pet Simulator Community{% endblock %}
+</head>
+
+{% block content %}
+<h1>Pet Simulator Community</h1>
+<p>View other users and their pets! Hover over users to see when they joined! If you want the times to be in your timezone, change your settings. </p>
+{% for user in users %}
+    <div class="user_pet mb-3">
+        <p class="mb-0" title="{{user}} joined on {{users[user].user_creation_date}}">{{user}}'s {{users[user].pet_type}}</p>
+        <a href="/{{user}}"><h3 class="pb-0 mb-0">{{users[user].pet_name}}</h3></a>
+    </div>
+        <img src="{{users[user].img}}" width=100 height=100 class="mb-4" style="margin-top: -0.6rem"/>
+{% endfor %}
+{% endblock %}

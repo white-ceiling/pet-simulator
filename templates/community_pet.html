@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+<head>
+{% block title %}{{username}}'s {{type}}{% endblock %}
+</head>
+
+{% block content %}
+<body>
+<div>
+    <!-- <img src="{{ img }}" id="pet" width="100" frameBorder="0"/> -->
+    <img src="{{ img }}" id="pet" width="100" height="100" frameBorder="0"/>
+    <h3>{{name}}</h3>
+    <p>Points: {{points}}</p>
+    <p>Current Status:</p>
+    <p> Food: {{food}}</p>
+    <p> Mood: {{play}}</p>
+    <!--eating, sleeping, playing, daydreaming, hungry, boring, drinking water, sick, etc -->
+    {% if logged_in %}
+    <div>
+        <form action="/{{username}}/feed">
+        <p>
+            <input type="submit" id="feed" value="Feed!"/>
+        </p>
+        </form>
+        <form action="/{{username}}/play">
+        <p>
+            <input type="submit" id="play" value="Play!" />
+        </p>
+        </form>    
+        
+        <script>
+            let session = {{session|tojson}};
+            let feed_button = document.getElementById("feed");
+            let play_button = document.getElementById("play");
+            checkClickable();
+            if ("{{img}}".includes("_eating.gif") || "{{img}}".includes("_playing.gif"))
+            {
+                feed_button.classList.add('off');
+                play_button.classList.add('off');
+                feed_button.style.pointerEvents = 'none'
+                play_button.style.pointerEvents = 'none'
+                window.onload = function(){
+                    setTimeout(reload, 15*1000);
+                };
+            }
+            function reload() {
+                document.getElementById("pet").src = "{{ alt_img }}";
+                checkClickable();
+            }
+            function checkClickable() {
+                if (session.community_current_food_bar == session.community_max_food_bar)
+                {
+                    feed_button.classList.add('off');
+                    feed_button.style.pointerEvents = 'none'
+                } else {
+                    feed_button.classList.remove('off');
+                    feed_button.style.pointerEvents = 'auto'
+                }
+        
+                if (session.community_current_play_bar == session.community_max_play_bar)
+                {
+                    play_button.classList.add('off');
+                    play_button.style.pointerEvents = 'none'
+                } else {
+                    play_button.classList.remove('off');
+                    play_button.style.pointerEvents = 'auto'
+                }
+            }
+        </script>
+    </div>
+    {% endif %}
+</div>
+</body>
+{% endblock %}
